@@ -13,7 +13,7 @@ import {client} from '../shared/models/client.model';
 export class ClientListComponent implements AfterViewInit {
   clients: any=[];
    dataSource: MatTableDataSource<client>;
-displayedColumns: string[] = ['id', 'name', 'cin'];
+displayedColumns: string[] = ['id', 'name', 'cin', 'tel1', 'typeclient' ];
 
 
     @ViewChild(MatPaginator) paginator: MatPaginator;

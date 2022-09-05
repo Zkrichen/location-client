@@ -3,7 +3,7 @@
 
 <mat-form-field appearance="standard">
   <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Bilel" #input>
 </mat-form-field>
 
 <div class="mat-elevation-z8">
@@ -13,7 +13,7 @@
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
       <td mat-cell *matCellDef="let row"> 
-      <h3 mat-line align="right"> 
+      <h3 mat-line align="left"> 
               <a mat-button [routerLink]="['/client-edit', row.id]">{{row.id}}</a>
      </h3>		 	
     </td>
@@ -27,7 +27,19 @@
       <td mat-cell *matCellDef="let row"> {{row.name}} </td>
     </ng-container>
 
-    <!-- Fruit Column -->
+        <!-- Type Column -->
+    <ng-container matColumnDef="typeclient">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> type </th>
+      <td mat-cell *matCellDef="let row"> {{row.typeclient}} </td>
+    </ng-container>
+ 
+    <!-- Tel Column -->
+    <ng-container matColumnDef="tel1">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Tel </th>
+      <td mat-cell *matCellDef="let row"> {{row.tel1}} </td>
+    </ng-container>
+
+    <!-- CIN Column -->
     <ng-container matColumnDef="cin">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> CIN </th>
       <td mat-cell *matCellDef="let row"> {{row.cin}} </td>
