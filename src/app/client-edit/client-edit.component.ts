@@ -2,9 +2,7 @@ import { Component,OnDestroy ,OnInit } from '@angular/core';
 import { ClientService } from '../shared/client/client.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
 import { client } from 'src/app/shared/models/client.model';
-import {MatInputModule} from '@angular/material/input';
 
 interface Type {
   value: string;
@@ -37,9 +35,7 @@ export class ClientEditComponent implements  OnInit, OnDestroy {
 
   ];
 
- 
-
-  typeClientContrat: string[] = ['Permanent', 'Saisonnaire'];
+typeClientContrat: string[] = ['Permanent', 'Saisonnaire'];
 
 sub!: Subscription;
 
@@ -81,7 +77,8 @@ save() {
         response => {
           console.log(response);
           this.gotoList();
-          },
+
+        },
         error => {
           console.log(error);
         });

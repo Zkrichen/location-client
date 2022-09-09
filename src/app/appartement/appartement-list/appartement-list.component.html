@@ -1,0 +1,62 @@
+<h2>Appartement List</h2>
+
+
+<mat-form-field appearance="standard">
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. A2" #input>
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort class="table table-striped sortable" id="tableResult">
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+      <td mat-cell *matCellDef="let row"> 
+      <h3 mat-line align="left"> 
+              <a mat-button [routerLink]="['/appartement-edit', row.id]">{{row.id}}</a>
+     </h3>		 	
+    </td>
+    </ng-container>
+
+
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+      <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+</div>
+	 <button mat-fab color="primary" [routerLink]="['/appartement-add']">Add</button> 
+
+
+
+<!-- <table class="table table-striped sortable" id="tableResult"> -->
+<!-- 	<thead> -->
+<!-- 	<th style="width:10%">Nom</th> -->
+<!-- 	</thead> -->
+<!-- 	<tbody> -->
+<!-- 		<tr *ngFor="let client of clients"> -->
+<!-- 			<td>{{client.name}}</td> -->
+<!-- 			<td> -->
+<!-- 		<h3 mat-line> -->
+<!--           <a mat-button [routerLink]="['/client-edit', client.id]">{{client.id}}</a> -->
+<!--         </h3> -->
+<!-- 		</td> -->
+<!-- 		</tr> -->
+		
+<!-- 	</tbody> -->
+<!-- 	<button mat-fab color="primary" [routerLink]="['/client-add']">Add</button> -->
+<!-- </table> -->

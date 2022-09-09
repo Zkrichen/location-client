@@ -51,6 +51,10 @@ import { ClientListComponent } from './client-list/client-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClientEditComponent } from './client-edit/client-edit.component';
 import { FormsModule } from '@angular/forms';
+import { AppartementEditComponent } from './appartement/appartement-edit/appartement-edit.component';
+import { AppartementListComponent } from './appartement/appartement-list/appartement-list.component';
+
+
 
 
 
@@ -59,7 +63,9 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     CarListComponent,
     ClientListComponent,
-    ClientEditComponent
+    ClientEditComponent,
+    AppartementEditComponent,
+    AppartementListComponent
   ],
   imports: [
     BrowserModule,
