@@ -35,7 +35,8 @@ displayedColumns: string[] = ['id', 'name', 'cin', 'tel1', 'typeclient' ];
   
   ngAfterViewInit() {
      this.clientService.getAll().subscribe(data => {
-          this.clients = data;
+
+      this.clients = data;
           this.dataSource = new MatTableDataSource(this.clients);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
