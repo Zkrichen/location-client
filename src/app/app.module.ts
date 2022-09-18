@@ -53,6 +53,8 @@ import { ClientEditComponent } from './client-edit/client-edit.component';
 import { FormsModule } from '@angular/forms';
 import { AppartementEditComponent } from './appartement/appartement-edit/appartement-edit.component';
 import { AppartementListComponent } from './appartement/appartement-list/appartement-list.component';
+import { ReservationComponent } from './reservation/reservation-list/reservation.component';
+import { ReservationEditComponent } from './reservation/reservation-edit/reservation-edit.component';
 
 
 
@@ -65,7 +67,9 @@ import { AppartementListComponent } from './appartement/appartement-list/apparte
     ClientListComponent,
     ClientEditComponent,
     AppartementEditComponent,
-    AppartementListComponent
+    AppartementListComponent,
+    ReservationComponent,
+    ReservationEditComponent
   ],
   imports: [
     BrowserModule,

@@ -6,7 +6,8 @@ import { AppartementListComponent } from './appartement/appartement-list/apparte
 import { AppartementEditComponent } from './appartement/appartement-edit/appartement-edit.component';
 
 import { ClientEditComponent } from './client-edit/client-edit.component';
-
+import { ReservationComponent } from './reservation/reservation-list/reservation.component';
+import { ReservationEditComponent } from './reservation/reservation-edit/reservation-edit.component';
 
 const routes: Routes = [
  { path: 'appartement-list', component: AppartementListComponent },
@@ -16,7 +17,11 @@ const routes: Routes = [
  { path: 'client-list', component: ClientListComponent },
  { path: '', component: ClientListComponent },
  { path: 'client-add', component: ClientEditComponent},
- { path: 'client-edit/:id',component: ClientEditComponent}
+ { path: 'client-edit/:id',component: ClientEditComponent},
+ { path: 'reservation-list', component: ReservationComponent },
+ { path: 'reservation-edit/:id', component: ReservationEditComponent },
+
+
 ];
 
 @NgModule({
