@@ -20,6 +20,7 @@ const routes: Routes = [
  { path: 'client-edit/:id',component: ClientEditComponent},
  { path: 'reservation-list', component: ReservationComponent },
  { path: 'reservation-edit/:id', component: ReservationEditComponent },
+ { path: 'reservation-add', component: ReservationEditComponent },
 
 
 ];

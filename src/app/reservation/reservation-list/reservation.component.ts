@@ -19,6 +19,8 @@ export class ReservationComponent implements  AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
     
   constructor(private resService: ReservationService) {
+      
+    
   }
   
      // this.dataSource = new MatTableDataSource(this.reservations);
@@ -29,8 +31,17 @@ export class ReservationComponent implements  AfterViewInit {
           this.dataSource = new MatTableDataSource<reservation>(data);
           this.reservations = data;   
            this.dataSource.paginator = this.paginator;
+            this.dataSource.filterPredicate = (data: reservation, filter: string) => {
+        
+        return data.appratement.name.toLocaleLowerCase().includes(filter);}
+
+        this.dataSource.filterPredicate = (data: reservation, filter: string) => {
+        
+        return data.client.name.toLocaleLowerCase().includes(filter);}
       this.dataSource.sort = this.sort;     
       });
+
+     
      
     }
   

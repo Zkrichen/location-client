@@ -2,7 +2,7 @@ import {Appartement} from './appartement.model';
 import {client} from './client.model';
 
 export class reservation {
-  appartement?: Appartement;
+  appratement?: Appartement;
   client?: client
   id?: any;
   datedebut?: Date;
