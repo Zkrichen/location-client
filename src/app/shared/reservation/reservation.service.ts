@@ -17,6 +17,21 @@ export class ReservationService {
  getAll(): Observable<any> {
         return this.http.get(this.RES_API+'?field=datefin');
       }
+ get(id: string) {
+        return this.http.get(this.RES_API + '/' + id);
+      }
 
+  save( res: reservation ): Observable<any> {
+        let result: Observable<any>;
+        if ( res.id ) {
+            result = this.http.put(this.RES_API+'/', res );
+        } else {
+            result = this.http.post(this.RES_API+'/', res );
+        }
+        return result;
+      }
+  remove(href: string ) {
+        return this.http.delete( href );
+  }
 
 }

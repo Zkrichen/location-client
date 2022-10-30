@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -50,15 +50,11 @@ import { CarListComponent } from './car-list/car-list.component';
 import { ClientListComponent } from './client-list/client-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClientEditComponent } from './client-edit/client-edit.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { AppartementEditComponent } from './appartement/appartement-edit/appartement-edit.component';
 import { AppartementListComponent } from './appartement/appartement-list/appartement-list.component';
 import { ReservationComponent } from './reservation/reservation-list/reservation.component';
 import { ReservationEditComponent } from './reservation/reservation-edit/reservation-edit.component';
-
-
-
-
 
 @NgModule({
   declarations: [
@@ -72,6 +68,7 @@ import { ReservationEditComponent } from './reservation/reservation-edit/reserva
     ReservationEditComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -121,9 +118,13 @@ import { ReservationEditComponent } from './reservation/reservation-edit/reserva
     MatTreeModule,
     OverlayModule,
     PortalModule,
-    ScrollingModule
+    ScrollingModule,
+    ReactiveFormsModule
   ],
   providers: [],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

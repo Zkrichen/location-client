@@ -8,7 +8,7 @@ export class reservation {
   datedebut?: Date;
   datefin?: Date;
   prixloyer?: any;
-  paye: boolean;
+  paye?: boolean;
   reduction?: any;
   nombredenuite?: any;
   prixparnuite?: string;
