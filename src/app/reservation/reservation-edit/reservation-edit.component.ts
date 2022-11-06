@@ -1,9 +1,13 @@
 import { Component ,OnInit } from '@angular/core';
 import { ReservationService } from '../../shared/reservation/reservation.service';
+import { AppService } from '../../shared/appartement/appartement.service';
+
 import { Subscription,Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { reservation } from 'src/app/shared/models/reservation.model';
 import { client } from 'src/app/shared/models/client.model';
+import { Appartement } from 'src/app/shared/models/appartement.model';
+
 
 import {FormGroup, FormControl} from '@angular/forms';
 import { ClientService } from '../../shared/client/client.service';
@@ -15,22 +19,30 @@ import {map, startWith} from 'rxjs/operators';
   styleUrls: ['./reservation-edit.component.css']
 })
 export class ReservationEditComponent implements OnInit {
-  clients: client[];
+ public clients: client[]=[];
+ public apartements: Appartement[]=[];
   range = new FormGroup({
     start: new FormControl(),
     end: new FormControl()
   });
   stateCtrl = new FormControl();
+  appratementsCtrl = new FormControl();
+
   filteredStates: Observable<client[]>;
+  appratementsStates: Observable<reservation[]>;
+
   sub!: Subscription;
   reservation: reservation = {
-    client: {}
+    client: {},
+    appratement :{}
   };
 
   constructor(private reservationService: ReservationService,
               private route: ActivatedRoute,
               private router: Router,
-              private clientService: ClientService) { }
+              private clientService: ClientService,
+              private appService: AppService
+              ) { }
 
   ngOnInit(){
    
@@ -45,22 +57,39 @@ export class ReservationEditComponent implements OnInit {
           //this.giphyService.get(car.name).subscribe(url => car.giphyUrl = url);
         } else {
           console.log(`Car with id '${id}' not found, returning to list`);
-          this.gotoList();
+          this
+          .gotoList();
         }
       }); 
     }
     this.clientService.getAll().subscribe(data => {
-
       this.clients = data;
-      this.filteredStates = this.stateCtrl.valueChanges
-      .pipe(
-        startWith(''),
-        map(client => client ? this._filterStates(client) : this.clients.slice())
-      );
-          
+      });
+
+    this.appService.getAll().subscribe(data => {
+      this.apartements = data;
       });
 
   });
+
+  this.filteredStates = this.stateCtrl.valueChanges.pipe(
+    startWith(''),
+    map(state => state ? this._filterStates(state) : this.clients.slice())
+  
+  );
+
+  this.appratementsStates = this.appratementsCtrl.valueChanges.pipe(
+    startWith(''),
+    map(state => state ? this._appartementFilterStates(state) : this.apartements.slice())
+  
+  );
+
+
+
+  }
+
+  displayFn(client: client): string {
+    return client && client.name ? client.name : '';
   }
   save() {
 
@@ -75,14 +104,19 @@ export class ReservationEditComponent implements OnInit {
           console.log(error);
         });
   }
-  private _filterStates(value: string): client[] {
-    const filterValue = value.toLowerCase();
+   _filterStates(value: string): client[] {
+    const filterValue =  typeof value === 'string' ? value.toLowerCase():'';
     return this.clients.filter(client => client.name.toLowerCase().includes(filterValue));
+  }
+
+  _appartementFilterStates(value: string): client[] {
+    const filterValue =  typeof value === 'string' ? value.toLowerCase():'';
+    return this.apartements.filter(res => res.name.toLowerCase().includes(filterValue));
   }
   gotoList() {
   this.router.navigate(['/reservation-list']);
 } 
-  ngOnDestroy() {
+    ngOnDestroy() {
   this.sub.unsubscribe();
 }
 
