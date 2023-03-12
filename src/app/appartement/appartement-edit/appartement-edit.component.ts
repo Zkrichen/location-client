@@ -14,7 +14,6 @@ import {MatTableDataSource} from '@angular/material/table';
   styleUrls: ['./appartement-edit.component.css']
 })
 export class AppartementEditComponent implements OnInit {
-      
     equipements: any=[];
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
@@ -22,7 +21,7 @@ export class AppartementEditComponent implements OnInit {
    appartement: Appartement = {};
    sub!: Subscription;
    dataSource: MatTableDataSource<AppartementEquipement>;
-   displayedColumns: string[] = ['id', 'type' ];
+   displayedColumns: string[] = ['id', 'type'];
   constructor(private route: ActivatedRoute,
             private router: Router,
             private appService: AppService) { }

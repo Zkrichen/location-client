@@ -11,7 +11,7 @@ export class reservation {
   paye?: boolean;
   reduction?: any;
   nombredenuite?: any;
-  prixparnuite?: string;
+  prixparnuite?: any;
   avance?: any;
   feedbackclient?: string;
   feedbackproprio?: string;

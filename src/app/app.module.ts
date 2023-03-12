@@ -55,6 +55,7 @@ import { AppartementEditComponent } from './appartement/appartement-edit/apparte
 import { AppartementListComponent } from './appartement/appartement-list/appartement-list.component';
 import { ReservationComponent } from './reservation/reservation-list/reservation.component';
 import { ReservationEditComponent } from './reservation/reservation-edit/reservation-edit.component';
+import { HomePaeComponent } from './home-pae/home-pae.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { ReservationEditComponent } from './reservation/reservation-edit/reserva
     AppartementEditComponent,
     AppartementListComponent,
     ReservationComponent,
-    ReservationEditComponent
+    ReservationEditComponent,
+    HomePaeComponent
   ],
   imports: [
     FormsModule,

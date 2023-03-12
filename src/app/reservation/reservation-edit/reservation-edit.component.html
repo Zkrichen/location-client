@@ -8,6 +8,7 @@
       <input [(ngModel)]=reservation.datedebut matStartDate formControlName="start" placeholder="Start date">
       <input [(ngModel)]=reservation.datefin matEndDate formControlName="end" placeholder="End date">
     </mat-date-range-input>
+    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-date-range-picker #picker></mat-date-range-picker>
   
@@ -15,7 +16,6 @@
     <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
   </mat-form-field>
   </div>
-
 
   <div class="row">
   <mat-form-field class="example-full-width" appearance="fill">
@@ -34,6 +34,24 @@
   </mat-form-field>
   </div>
 
+  
+  <div class="row">
+    <mat-form-field class="Appartement" appearance="fill" id="Appartement" >
+      <mat-label>Appartement</mat-label>
+      <input matInput
+             aria-label="appartement"
+             [matAutocomplete]="autoA"
+             [formControl]="appratementsCtrl"
+             [(ngModel)]="reservation.appratement">
+              <mat-autocomplete autoActiveFirstOption #autoA="matAutocomplete" [displayWith]="displayApp" > 
+               <mat-option *ngFor="let app of appratementsStates | async" [value]="app"    >
+          <span>{{app.name}}</span> -
+          <small>Bat: {{app.batiment}}</small>
+        </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+    </div>
+
 <div class="row"></div>
 <div class="row">
   <mat-form-field class="col">
@@ -50,13 +68,11 @@
   </mat-form-field>
 
   <mat-form-field class="col">
-    <input matInput placeholder="reduction" [(ngModel)]="reservation.reduction" required name="reduction"
-      >
+    <input matInput placeholder="reduction" [(ngModel)]="reservation.reduction" required name="reduction">
   </mat-form-field>
 
   <mat-form-field class="col">
-    <input matInput placeholder="Avance par client" [(ngModel)]="reservation.prixloyer" required name="prixloyer"
-      >
+    <input matInput placeholder="Avance par client" [(ngModel)]="reservation.prixloyer" required name="prixloyer">
   </mat-form-field>
 </div>
 
@@ -65,13 +81,34 @@
 <br />
 <div class="row">
   <mat-form-field class="col">
-    <input name="paye" matInput placeholder="Total">{{reservation.prixloyer*(reservation.nombredenuite-reservation.nombrenuitgratuit)-reservation.reduction}} 
+    <input name="paye" matInput placeholder="Total">{{(reservation.prixparnuite*(reservation.nombredenuite-reservation.nombrenuitgratuit))-reservation.reduction}} 
+</mat-form-field>
+
+<mat-form-field class="col">
+  <input name="rest" matInput placeholder="Reste A payer">{{(reservation.prixparnuite*(reservation.nombredenuite-reservation.nombrenuitgratuit))-reservation.reduction-reservation.prixloyer}} 
 </mat-form-field>
 
 
-  <mat-slide-toggle class="col" name="Total" [(ngModel)]="reservation.paye">Paiement Total?</mat-slide-toggle>
+  <mat-slide-toggle class="col" name="Total" [(ngModel)]="reservation.paye">Paiement Total</mat-slide-toggle>
 
 </div>
+
+<br />
+<div class="row">
+<mat-form-field  class="col">
+  <mat-label>Feedback client</mat-label>
+  <textarea matInput placeholder="Ex. It makes me feel..." name="feedbackC"  [(ngModel)]="reservation.feedbackclient"></textarea>
+</mat-form-field>
+</div>
+<br />
+<div class="row">
+<mat-form-field class="col">
+  <mat-label>Feedback Propriotaire</mat-label>
+  <textarea matInput placeholder="Ex. It makes me feel..."  name="feedbackP"  [(ngModel)]="reservation.feedbackproprio"></textarea>
+</mat-form-field>
+
+</div>
+
 <mat-card-actions>
   <button mat-raised-button color="primary" type="submit" >Save</button>
   <button mat-raised-button color="secondary" (click)="remove(reservation.id)" type="button">Delete</button>

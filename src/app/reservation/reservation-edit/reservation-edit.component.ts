@@ -21,6 +21,9 @@ import {map, startWith} from 'rxjs/operators';
 export class ReservationEditComponent implements OnInit {
  public clients: client[]=[];
  public apartements: Appartement[]=[];
+ public total:any=0;
+ public reste:any=0;
+
   range = new FormGroup({
     start: new FormControl(),
     end: new FormControl()
@@ -29,7 +32,7 @@ export class ReservationEditComponent implements OnInit {
   appratementsCtrl = new FormControl();
 
   filteredStates: Observable<client[]>;
-  appratementsStates: Observable<reservation[]>;
+  appratementsStates: Observable<Appartement[]>;
 
   sub!: Subscription;
   reservation: reservation = {
@@ -55,6 +58,7 @@ export class ReservationEditComponent implements OnInit {
           this.reservation = reservation;
           //this.client.href = client._links.self.href;
           //this.giphyService.get(car.name).subscribe(url => car.giphyUrl = url);
+          this.total=this.reservation.prixparnuite*(this.reservation.nombredenuite-this.reservation.nombrenuitgratuit)-this.reservation.reduction;
         } else {
           console.log(`Car with id '${id}' not found, returning to list`);
           this
@@ -84,12 +88,13 @@ export class ReservationEditComponent implements OnInit {
   
   );
 
-
-
   }
 
   displayFn(client: client): string {
-    return client && client.name ? client.name : '';
+    return client && client.name ? client.name+' - '+client.tel1 : '';
+  }
+  displayApp(appartement: Appartement): string {
+    return appartement && appartement.name ? appartement.name+" - "+appartement.batiment : '';
   }
   save() {
 
@@ -109,9 +114,9 @@ export class ReservationEditComponent implements OnInit {
     return this.clients.filter(client => client.name.toLowerCase().includes(filterValue));
   }
 
-  _appartementFilterStates(value: string): client[] {
+  _appartementFilterStates(value: string): Appartement[] {
     const filterValue =  typeof value === 'string' ? value.toLowerCase():'';
-    return this.apartements.filter(res => res.name.toLowerCase().includes(filterValue));
+    return this.apartements.filter(app => app.name.toLowerCase().includes(filterValue));
   }
   gotoList() {
   this.router.navigate(['/reservation-list']);

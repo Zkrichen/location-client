@@ -7,21 +7,28 @@ import { reservation } from 'src/app/shared/models/reservation.model';
 })
 export class ReservationService {
 
-   public API = '//localhost:8080';
-    public RES_API = this.API + '/reservations/';
+  public API = '//localhost:8080';
+  public RES_API = this.API + '/reservations';
 
 
-    constructor(private http: HttpClient) {
-    }
+  constructor(private http: HttpClient) {
+  }
 
  getAll(): Observable<any> {
-        return this.http.get(this.RES_API+'?field=datefin');
+        return this.http.get(this.RES_API+'/'+'?field=datefin');
+      }
+ getCheckIn(): Observable<any> {
+        return this.http.get(this.RES_API+'/'+'checkIn');
+      }
+
+ getCheckOut(): Observable<any> {
+        return this.http.get(this.RES_API+'/'+'checkOut');
       }
  get(id: string) {
         return this.http.get(this.RES_API + '/' + id);
       }
 
-  save( res: reservation ): Observable<any> {
+ save( res: reservation ): Observable<any> {
         let result: Observable<any>;
         if ( res.id ) {
             result = this.http.put(this.RES_API+'/', res );

@@ -1,0 +1,67 @@
+<mat-tab-group dynamicHeight>
+    <mat-tab label="Check OUT">
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSourceCheckOUT" matSort class="table table-striped sortable" id="tableResult">
+          
+              <!-- ID Column -->
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                <td mat-cell *matCellDef="let row"> 
+                <h3 mat-line align="left"> 
+                    <a mat-button [routerLink]="['/reservation-edit', row.id]">{{row.id}}</a>
+               </h3>		 	
+              </td>
+              </ng-container>
+          
+              <!-- date debut -->
+              <ng-container matColumnDef="datedebut">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Date Debut </th>
+                <td mat-cell *matCellDef="let row"> {{row.datedebut | date :  "dd/MM/y"}} </td>
+              </ng-container>
+          
+                  <!-- Type Column -->
+              <ng-container matColumnDef="detefin">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Date Fin </th>
+                <td mat-cell *matCellDef="let row"> {{row.datefin | date :  "dd/MM/y"}} </td>
+              </ng-container>
+           
+              <!-- Tel Column -->
+              <ng-container matColumnDef="appartement">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Appartement </th>
+                <td mat-cell *matCellDef="let row"> {{row.appratement.name}} </td>
+              </ng-container>
+          
+              <!-- CIN Column -->
+              <ng-container matColumnDef="client">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Client </th>
+                <td mat-cell *matCellDef="let row"> {{row.client.name}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="paye">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Payement </th>
+                <td mat-cell *matCellDef="let row"> {{row.paye}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="reste">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Reste à payer </th>
+                <td mat-cell *matCellDef="let row"> {{(row.prixparnuite*(row.nombredenuite-row.nombrenuitgratuit))-row.reduction-row.prixloyer}}  </td>
+              </ng-container>
+          
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          
+              <!-- Row shown when there is no matching data. -->
+              <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data </td>
+              </tr>
+            </table>
+          
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+          </div>    </mat-tab>
+    <mat-tab label="Check IN">
+      <div class="example-large-box mat-elevation-z4">
+        Large content
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+  

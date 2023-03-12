@@ -5,9 +5,10 @@ export class AppartementEquipement {
   description?: string;
   nombreDePiece?: number;
   dateAchat?: Date;
-  prixAchat?: number;
+  prixachat?: number;
   reference?: string;
   appartement?: number;
+  type?:string;
   
 }
 

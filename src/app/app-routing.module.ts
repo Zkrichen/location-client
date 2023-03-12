@@ -8,6 +8,8 @@ import { AppartementEditComponent } from './appartement/appartement-edit/apparte
 import { ClientEditComponent } from './client-edit/client-edit.component';
 import { ReservationComponent } from './reservation/reservation-list/reservation.component';
 import { ReservationEditComponent } from './reservation/reservation-edit/reservation-edit.component';
+import { HomePaeComponent } from './home-pae/home-pae.component';
+
 
 const routes: Routes = [
  { path: 'appartement-list', component: AppartementListComponent },
@@ -15,7 +17,7 @@ const routes: Routes = [
  { path: 'appartement-edit/:id', component: AppartementEditComponent },
 
  { path: 'client-list', component: ClientListComponent },
- { path: '', component: ClientListComponent },
+ { path: '', component: HomePaeComponent },
  { path: 'client-add', component: ClientEditComponent},
  { path: 'client-edit/:id',component: ClientEditComponent},
  { path: 'reservation-list', component: ReservationComponent },
