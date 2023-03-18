@@ -25,6 +25,36 @@
 						name="Superficie">
 				</mat-form-field>
 			</div>
+
+			<div class="row">
+				<mat-form-field class="col">
+					<input matInput class="form-control" placeholder="Etage" [(ngModel)]="appartement.etage"
+						name="etage">
+				</mat-form-field>
+
+				<mat-form-field class="col">
+					<input matInput class="form-control" placeholder="Nombre de Chambre" [(ngModel)]="appartement.nombredechambre"
+						name="nombreDeChambre">
+				</mat-form-field>
+			</div>
+
+			<div class="row">
+				<br />
+				<mat-form-field class="col-md-6 mb-3">
+				  <textarea matInput class="form-control" placeholder="Description" [(ngModel)]="appartement.description"
+					name="description"></textarea>
+				</mat-form-field>
+
+				<mat-form-field class="col-md-6 mb-3">
+					<mat-label>Type Appartement</mat-label>
+					<mat-select [(ngModel)]="appartement.type" name="type">
+					  <mat-option *ngFor="let t of type" [value]="t.value">
+						{{t.viewValue}}
+					  </mat-option>
+					</mat-select>
+				  </mat-form-field>
+				
+			</div>
 		</mat-card-content>
 		<mat-card-actions>
 			<button mat-raised-button color="primary" type="submit" [disabled]="!cardForm.valid">Save</button>

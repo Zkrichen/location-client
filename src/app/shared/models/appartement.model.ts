@@ -5,6 +5,10 @@ export class Appartement {
   superficie?: number;
   batiment?: string;
   adresse?: string;
+  etage?: number;
+  description?: string;
+  nombredechambre?: number;
+  type?:string;
   
 }
 

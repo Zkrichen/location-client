@@ -13,7 +13,7 @@ import {Appartement} from '../../shared/models/appartement.model';
 export class AppartementListComponent implements AfterViewInit {
   appartements: any=[];
    dataSource: MatTableDataSource<Appartement>;
- displayedColumns: string[] = ['id', 'name' ];
+ displayedColumns: string[] = ['id', 'name', 'etage',  'nombredechambre'];
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;

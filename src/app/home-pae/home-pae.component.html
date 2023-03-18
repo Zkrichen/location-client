@@ -1,7 +1,7 @@
 <mat-tab-group dynamicHeight>
     <mat-tab label="Check OUT">
         <div class="mat-elevation-z8">
-            <table mat-table [dataSource]="dataSourceCheckOUT" matSort class="table table-striped sortable" id="tableResult">
+            <table mat-table [dataSource]="dataSourceCheckOUT" matSort class="mat-elevation-z8" id="tableResult">
           
               <!-- ID Column -->
               <ng-container matColumnDef="id">
@@ -48,7 +48,7 @@
               </ng-container>
           
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              <tr mat-row [ngClass]="{'make-gold': row.paye == false}" *matRowDef="let row; columns: displayedColumns;"></tr>
           
               <!-- Row shown when there is no matching data. -->
               <tr class="mat-row" *matNoDataRow>

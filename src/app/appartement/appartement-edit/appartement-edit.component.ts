@@ -8,11 +8,16 @@ import { AppartementEquipement } from 'src/app/shared/models/appartementEquipeme
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+interface typeAppartement {
+  value: string;
+  viewValue: string;
+}
 @Component({
   selector: 'app-appartement-edit',
   templateUrl: './appartement-edit.component.html',
   styleUrls: ['./appartement-edit.component.css']
 })
+
 export class AppartementEditComponent implements OnInit {
     equipements: any=[];
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -22,6 +27,15 @@ export class AppartementEditComponent implements OnInit {
    sub!: Subscription;
    dataSource: MatTableDataSource<AppartementEquipement>;
    displayedColumns: string[] = ['id', 'type'];
+//   typeAppartement: string[] = ['Villa', 'Appartement', 'Maison'];
+
+ 
+   type: typeAppartement[] = [
+    {value: 'Villa', viewValue: 'Villa'},
+    {value: 'Appartement', viewValue: 'Appartement'},
+    {value: 'Maison', viewValue: 'Maison'},
+  ];
+
   constructor(private route: ActivatedRoute,
             private router: Router,
             private appService: AppService) { }
@@ -81,8 +95,6 @@ remove(href: any) {
 }
 
  ngAfterViewInit() {
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
     }
   
   applyFilter(event: Event) {
