@@ -15,7 +15,7 @@ export class ReservationService {
   }
 
  getAll(): Observable<any> {
-        return this.http.get(this.RES_API+'/'+'?field=datefin');
+        return this.http.get(this.RES_API+'/'+'?field=id');
       }
  getCheckIn(): Observable<any> {
         return this.http.get(this.RES_API+'/'+'checkIn');

@@ -9,6 +9,8 @@ export class Appartement {
   description?: string;
   nombredechambre?: number;
   type?:string;
+ 
+
   
 }
 

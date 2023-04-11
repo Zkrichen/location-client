@@ -13,7 +13,7 @@ import {reservation} from '../../shared/models/reservation.model';
 export class ReservationComponent implements  AfterViewInit {
   reservations: any=[];
   dataSource: MatTableDataSource<reservation>;
-  displayedColumns: string[] = ['id', 'datedebut', 'detefin', 'appartement', 'client' ];
+  displayedColumns: string[] = ['id', 'datedebut', 'detefin', 'appartement', 'client', 'typereservation', 'casse', 'bruit'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -28,16 +28,16 @@ export class ReservationComponent implements  AfterViewInit {
   
   ngAfterViewInit() {
        this.resService.getAll().subscribe(data => {
-          this.dataSource = new MatTableDataSource<reservation>(data);
-          this.reservations = data;   
-           this.dataSource.paginator = this.paginator;
-            this.dataSource.filterPredicate = (data: reservation, filter: string) => {
-        
-        return data.appratement.name.toLocaleLowerCase().includes(filter);}
+       this.dataSource = new MatTableDataSource<reservation>(data);
+       this.reservations = data;   
+       this.dataSource.paginator = this.paginator;
+       this.dataSource.filterPredicate = (data: reservation, filter: string) => {
+        return data.appratement.name.toLocaleLowerCase().includes(filter);
+      }
 
-        this.dataSource.filterPredicate = (data: reservation, filter: string) => {
-        
-        return data.client.name.toLocaleLowerCase().includes(filter);}
+        this.dataSource.filterPredicate = (data: reservation, filter: string) => {  
+        return data.client.name.toLocaleLowerCase().includes(filter);
+      }
       this.dataSource.sort = this.sort;     
       });
 

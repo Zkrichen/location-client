@@ -17,6 +17,9 @@ export class reservation {
   feedbackproprio?: string;
   nombrenuitgratuit?: any;
   nombredemois?: string;
+  oknok?:string;
+  bruit?:boolean;
+  casse?:boolean;
   
 
 }

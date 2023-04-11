@@ -8,7 +8,7 @@
       <input [(ngModel)]=reservation.datedebut matStartDate formControlName="start" placeholder="Start date">
       <input [(ngModel)]=reservation.datefin matEndDate formControlName="end" placeholder="End date">
     </mat-date-range-input>
-    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+    <mat-hint>DD/MM/YYYY – DD/MM/YYYY</mat-hint>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-date-range-picker #picker></mat-date-range-picker>
   
@@ -28,7 +28,8 @@
             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn" > 
              <mat-option *ngFor="let cli of filteredStates | async" [value]="cli"    >
         <span>{{cli.name}}</span> |
-        <small>Tel: {{cli.tel1}}</small>
+        <small>Tel: {{cli.tel1}}</small> |
+        <small>CIN: {{cli.cin}}</small>
       </mat-option>
       </mat-autocomplete>
   </mat-form-field>
@@ -46,7 +47,8 @@
               <mat-autocomplete autoActiveFirstOption #autoA="matAutocomplete" [displayWith]="displayApp" > 
                <mat-option *ngFor="let app of appratementsStates | async" [value]="app"    >
           <span>{{app.name}}</span> -
-          <small>Bat: {{app.batiment}}</small>
+          <small>Bat: {{app.batiment}}</small> - 
+          <small>ID: {{app.id}}</small>
         </mat-option>
         </mat-autocomplete>
     </mat-form-field>
@@ -55,24 +57,24 @@
 <div class="row"></div>
 <div class="row">
   <mat-form-field class="col">
-    <input matInput placeholder="Prix par nuit" [(ngModel)]="reservation.prixparnuite" required name="prixloyer"
+    <input matInput placeholder="Prix par nuit" (change)="calculTotal()"  [(ngModel)]="reservation.prixparnuite" required name="prixloyer"
       >
   </mat-form-field>
 
   <mat-form-field class="col">
-    <input matInput placeholder="Nombre de nuit" [(ngModel)]="reservation.nombredenuite" required name="nombredenuite">
+    <input matInput placeholder="Nombre de nuit" (change)="calculTotal()"  [(ngModel)]="reservation.nombredenuite" required name="nombredenuite">
   </mat-form-field>
 
   <mat-form-field class="col">
-    <input matInput placeholder="Nombre de nuit gratuit" [(ngModel)]="reservation.nombrenuitgratuit" required name="nombrenuitgratuit">
+    <input matInput placeholder="Nombre de nuit gratuit" (change)="calculTotal()"  [(ngModel)]="reservation.nombrenuitgratuit" required name="nombrenuitgratuit">
   </mat-form-field>
 
   <mat-form-field class="col">
-    <input matInput placeholder="reduction" [(ngModel)]="reservation.reduction" required name="reduction">
+    <input matInput placeholder="reduction" (change)="calculTotal()"  [(ngModel)]="reservation.reduction" required name="reduction">
   </mat-form-field>
 
   <mat-form-field class="col">
-    <input matInput placeholder="Avance par client" [(ngModel)]="reservation.prixloyer" required name="prixloyer">
+    <input matInput placeholder="Avance par client"  (change)="calculTotal()" [(ngModel)]="reservation.avance" required name="avance">
   </mat-form-field>
 </div>
 
@@ -81,16 +83,13 @@
 <br />
 <div class="row">
   <mat-form-field class="col">
-    <input name="paye" matInput placeholder="Total">{{(reservation.prixparnuite*(reservation.nombredenuite-reservation.nombrenuitgratuit))-reservation.reduction}} 
+    <input name="paye" matInput placeholder="Total">{{total}} 
 </mat-form-field>
 
 <mat-form-field class="col">
-  <input name="rest" matInput placeholder="Reste A payer">{{(reservation.prixparnuite*(reservation.nombredenuite-reservation.nombrenuitgratuit))-reservation.reduction-reservation.prixloyer}} 
+  <input name="rest" matInput placeholder="Reste A payer">{{(reservation.prixparnuite*(reservation.nombredenuite-reservation.nombrenuitgratuit))-reservation.reduction-reservation.avance}} 
 </mat-form-field>
-
-
   <mat-slide-toggle class="col" name="Total" [(ngModel)]="reservation.paye">Paiement Total</mat-slide-toggle>
-
 </div>
 
 <br />
@@ -108,10 +107,23 @@
 </mat-form-field>
 
 </div>
+<div class="row">
+<mat-form-field class="col-md-6 mb-3">
+  <mat-label>Type Reservation</mat-label>
+  <mat-select [(ngModel)]="reservation.oknok" name="type">
+    <mat-option *ngFor="let t of type" [value]="t.value">
+    {{t.viewValue}}
+    </mat-option>
+  </mat-select>
+  </mat-form-field>
+    <mat-slide-toggle class="col" name="casse"  [(ngModel)]="reservation.casse">Casse</mat-slide-toggle>
+    <mat-slide-toggle class="col" name="bruit" [(ngModel)]="reservation.bruit">Bruit</mat-slide-toggle>
+</div>
 
 <mat-card-actions>
   <button mat-raised-button color="primary" type="submit" >Save</button>
   <button mat-raised-button color="secondary" (click)="remove(reservation.id)" type="button">Delete</button>
   <a mat-button routerLink="/reservation-list">Cancel</a>
 </mat-card-actions>
-</form>
+
+</form> 

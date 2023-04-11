@@ -12,7 +12,10 @@ import { Appartement } from 'src/app/shared/models/appartement.model';
 import {FormGroup, FormControl} from '@angular/forms';
 import { ClientService } from '../../shared/client/client.service';
 import {map, startWith} from 'rxjs/operators';
-
+interface typeClient {
+  value: string;
+  viewValue: string;
+}
 @Component({
   selector: 'app-reservation-edit',
   templateUrl: './reservation-edit.component.html',
@@ -21,13 +24,17 @@ import {map, startWith} from 'rxjs/operators';
 export class ReservationEditComponent implements OnInit {
  public clients: client[]=[];
  public apartements: Appartement[]=[];
- public total:any=0;
- public reste:any=0;
+ public total:number=0;
+ public reste:number=0;
 
   range = new FormGroup({
     start: new FormControl(),
     end: new FormControl()
   });
+  type: typeClient[] = [
+    {value: 'Ok', viewValue: 'Ok'},
+    {value: 'NOOK', viewValue: 'NO OK'}
+  ];
   stateCtrl = new FormControl();
   appratementsCtrl = new FormControl();
 
@@ -129,6 +136,11 @@ remove(href: any) {
   this.reservationService.remove(href).subscribe(result => {
     this.gotoList();
   }, error => console.error(error));
+}
+
+calculTotal() {
+  //{{(reservation.prixparnuite*(reservation.nombredenuite-reservation.nombrenuitgratuit))-reservation.reduction}} 
+  this.total=(this.reservation.prixparnuite*(this.reservation.nombredenuite-this.reservation.nombrenuitgratuit))-this.reservation.reduction;
 }
 
 }
