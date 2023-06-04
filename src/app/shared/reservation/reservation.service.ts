@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { reservation } from 'src/app/shared/models/reservation.model';
+import { environment } from '../../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ReservationService {
+  API = environment.API_LINK;
 
-  public API = '//localhost:8080';
   public RES_API = this.API + '/reservations';
 
 
