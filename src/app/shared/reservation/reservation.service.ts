@@ -19,12 +19,12 @@ export class ReservationService {
  getAll(): Observable<any> {
         return this.http.get(this.RES_API+'/'+'?field=id');
       }
- getCheckIn(): Observable<any> {
-        return this.http.get(this.RES_API+'/'+'checkIn');
+ getCheckIn(dateIn: string): Observable<any> {
+        return this.http.get(this.RES_API+'/'+'checkIn?dateIn='+dateIn);
       }
 
- getCheckOut(): Observable<any> {
-        return this.http.get(this.RES_API+'/'+'checkOut');
+ getCheckOut(dateOut: string): Observable<any> {
+        return this.http.get(this.RES_API+'/'+'checkOut?dateOut='+dateOut);
       }
  get(id: string) {
         return this.http.get(this.RES_API + '/' + id);

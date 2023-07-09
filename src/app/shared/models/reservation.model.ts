@@ -21,5 +21,11 @@ export class reservation {
   bruit?:boolean;
   casse?:boolean;
   
+  constructor(){
+    this.reduction=0;
+    this.avance=0;
+    this.paye=false;
 
+
+  }
 }

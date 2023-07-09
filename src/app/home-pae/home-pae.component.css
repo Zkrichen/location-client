@@ -1,7 +1,21 @@
 table {
     width: 100%;
-  }
+}
   
-  .make-gold {
-      background-color: rgb(255, 77, 0)
-  }
+.make-gold {
+    background-color: rgb(255, 77, 0)
+}
+
+.mat-form-field-infix{
+    display: flex !important;
+}
+
+.mat-button.mat-warn, .mat-icon-button.mat-warn, .mat-stroked-button.mat-warn {
+    background-color: #2374ab;
+    color: #fff;
+    margin-left: 3rem;
+}
+
+.mat-form-field {
+    margin: 1rem 0 2rem;
+}

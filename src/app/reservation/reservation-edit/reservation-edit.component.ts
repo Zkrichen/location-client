@@ -44,7 +44,12 @@ export class ReservationEditComponent implements OnInit {
   sub!: Subscription;
   reservation: reservation = {
     client: {},
-    appratement :{}
+    appratement :{},
+    paye:false,
+    avance:0,
+    reduction:0,
+    nombrenuitgratuit: 0
+    
   };
 
   constructor(private reservationService: ReservationService,
