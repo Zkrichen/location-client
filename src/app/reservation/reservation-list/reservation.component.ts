@@ -4,6 +4,12 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {reservation} from '../../shared/models/reservation.model';
+import { Appartement } from 'src/app/shared/models/appartement.model';
+import { Observable } from 'rxjs';
+import { FormControl} from '@angular/forms';
+import { AppService } from '../../shared/appartement/appartement.service';
+import {map, startWith} from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-reservation',
@@ -14,11 +20,16 @@ export class ReservationComponent implements  AfterViewInit {
   reservations: any=[];
   dataSource: MatTableDataSource<reservation>;
   displayedColumns: string[] = ['id', 'datedebut', 'detefin', 'appartement', 'client', 'typereservation', 'casse', 'bruit'];
+  public apartements: Appartement[]=[];
+  appratementsStates: Observable<Appartement[]>;
+  appratement: Appartement;
+  appratementsCtrl = new FormControl();
+
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
     
-  constructor(private resService: ReservationService) {
+  constructor(private resService: ReservationService,  private appService: AppService) {
       
     
   }
@@ -41,8 +52,35 @@ export class ReservationComponent implements  AfterViewInit {
       this.dataSource.sort = this.sort;     
       });
 
+      this.appService.getAll().subscribe(data => {
+        this.apartements = data;
+        });
+
+        this.appratementsStates = this.appratementsCtrl.valueChanges.pipe(
+          startWith(''),
+          map(state => state ? this._appartementFilterStates(state) : this.apartements.slice())
+        
+        );
      
-     
+    }
+    searchInReservation(){
+      var resToSearch: reservation[]=[];
+      if(this.appratement!=null){
+        for (let res of this.reservations) {
+          if (res.appratement.id === this.appratement.id  ) {
+            resToSearch.push(res)
+
+          }
+          
+       }
+      }
+
+    
+      this.dataSource = new MatTableDataSource<reservation>(resToSearch);
+        }
+    _appartementFilterStates(value: string): Appartement[] {
+      const filterValue =  typeof value === 'string' ? value.toLowerCase():'';
+      return this.apartements.filter(app => app.name.toLowerCase().includes(filterValue));
     }
   
   applyFilter(event: Event) {
@@ -53,4 +91,9 @@ export class ReservationComponent implements  AfterViewInit {
         this.dataSource.paginator.firstPage();
       }
     }
+
+    displayApp(appartement: Appartement): string {
+      return appartement && appartement.name ? appartement.name+" - "+appartement.batiment : '';
+    }
+
   }
