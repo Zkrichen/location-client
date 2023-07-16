@@ -1,10 +1,9 @@
 <h2>Reservation</h2>
 
 
-<div class="container">
   <div class="row">
     <div class="col-4">
-      <mat-form-field class="Appartement" appearance="fill" id="Appartement" >
+      <mat-form-field class="example-full-width" appearance="fill" id="Appartement" >
         <mat-label>Appartement</mat-label>
         <input matInput
                aria-label="appartement"
@@ -21,19 +20,43 @@
       </mat-form-field>
     </div>
     <div class="col">
-      Column
+      <div class="col-4">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Client</mat-label>
+          <input matInput
+                 aria-label="client"
+                 [matAutocomplete]="auto"
+                 [formControl]="stateCtrl"
+                 [(ngModel)]="client">
+                  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn" > 
+                   <mat-option *ngFor="let cli of filteredStates | async" [value]="cli">
+              <span>{{cli.name}}</span> |
+              <small>ID: {{cli.id}}</small> |
+              <small>CIN: {{cli.cin}}</small>
+            </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+        </div>
     </div>
-    <div class="col">
-      Column
+    <div class="col-4">
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [(ngModel)]="dateRes"  [matDatepicker]="picker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
     </div>
+</div>
+
+<div class="row">
+  <div class="col-1">
+  <button mat-raised-button color="primary"  (click)="searchInReservation()">Recherche</button>
+  </div>
+  <div class="col-1">
+  <button mat-raised-button color="accent" (click)="clear()">Reset</button>
   </div>
 </div>
-<button mat-button color="warn" (click)="searchInReservation()">Search</button>
-
-<mat-form-field appearance="standard">
-  <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Bilel" #input>
-</mat-form-field>
 <!-- 
 <mat-form-field class="search__form_field" appearance="outline">
   <mat-label>name</mat-label>
@@ -79,7 +102,7 @@
     <!-- CIN Column -->
     <ng-container matColumnDef="client">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Client </th>
-      <td mat-cell *matCellDef="let row"> {{row.client.name}} - {{row.client.id}}</td>
+      <td mat-cell *matCellDef="let row"> {{row.client.name}} - {{row.client.id}} - {{row.client.cin}}</td>
     </ng-container>
 
        <!-- CIN Column -->
@@ -103,7 +126,7 @@
 
     <!-- Row shown when there is no matching data. -->
     <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      <td class="mat-cell" colspan="4">No data matching the filter </td>
     </tr>
   </table>
 

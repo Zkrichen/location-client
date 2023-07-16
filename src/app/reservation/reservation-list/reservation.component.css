@@ -18,3 +18,7 @@ table {
 th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
     vertical-align: middle;
 }
+
+.mat-form-field {
+width: 400px;
+}

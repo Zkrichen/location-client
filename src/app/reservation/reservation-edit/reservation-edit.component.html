@@ -26,10 +26,11 @@
            [formControl]="stateCtrl"
            [(ngModel)]="reservation.client">
             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn" > 
-             <mat-option *ngFor="let cli of filteredStates | async" [value]="cli"    >
+             <mat-option *ngFor="let cli of filteredStates | async" [value]="cli">
         <span>{{cli.name}}</span> |
         <small>Tel: {{cli.tel1}}</small> |
-        <small>CIN: {{cli.cin}}</small>
+        <small>CIN: {{cli.cin}}</small> |
+        <small>Id: {{cli.id}}</small>
       </mat-option>
       </mat-autocomplete>
   </mat-form-field>
